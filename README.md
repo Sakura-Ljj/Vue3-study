@@ -125,3 +125,66 @@ count.value++ // 输出 1
 </script>
 ```
 
+##### 组件的数据传递
+
+###### defineProps()函数
+
+用于接收组件外传递的数据, 与`props`选项相同的值
+
+```vue
+<Components :foo="test"></Components> 
+
+<script setup>
+// 组件内
+import { defineProps } from 'vue'
+   
+ const props = defineProps({
+     foo: String,	// 类型限制
+ })
+</script>
+```
+
+###### defineEmits()函数
+
+用于接收组件外传递的自定义方法, 与emits选项相同的值
+
+```vue
+<Compoments @change="onChange" @delete="onDelete"></Compoments>
+
+<script setup>
+// 组件内
+import { defineEmits } from 'vue'
+ 
+ const emits = defineEmits(['change', 'delete'])
+ 
+ onChange() {
+     emits('change', num)
+ }
+    
+ onDelete() {
+     emits('delete', num)
+ }
+</script>
+```
+
+如果使用`v-model`给组件传递参数则可以省去发出参数改变通知的事件, 通过`update:modelValue`这个emit事件发出通知即可
+
+```vue
+<Components v-model="test"></Components>
+
+<script setup>
+// 组件内
+import { defineProps, defineEmits } from 'vue'
+
+const { modelValue } = defineProps({
+    modelValue: String
+})
+
+const emits = defineEmits(['update:modelValue'])
+
+onChange() {
+    emits('update:modelValue', num)
+}
+</script>
+```
+
