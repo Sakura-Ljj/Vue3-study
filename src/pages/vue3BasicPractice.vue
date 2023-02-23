@@ -2,9 +2,9 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 16:10:25
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-01-30 16:05:33
- * @FilePath: \vue3project\src\pages\Home.vue
- * @Description: 
+ * @LastEditTime: 2023-02-23 15:42:22
+ * @FilePath: \vue3project\src\pages\vue3BasicPractice.vue
+ * @Description:
 -->
 
 <template>
@@ -16,9 +16,9 @@
     <h1>你的评分是{{score}}</h1>
 </template>
 <script setup>
-import { ref } from 'vue';
-import Todolist from '../components/todolist.vue';
-import Rate from '../components/rate.vue';
+import { ref } from 'vue'
+import Todolist from '../components/todolist.vue'
+import Rate from '../components/rate.vue'
 
 const score = ref(3)
 

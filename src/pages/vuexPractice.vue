@@ -7,5 +7,9 @@
  * @Description: 
 -->
 <template>
-    <h1>This is About</h1>
+    <Count />
 </template>
+
+<script setup>
+import Count from '../components/count.vue';
+</script>

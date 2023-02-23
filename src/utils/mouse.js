@@ -1,4 +1,4 @@
-import {ref, onMounted, onUnmounted} from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const useMouse = () => {
     const x = ref(0)
@@ -20,4 +20,4 @@ const useMouse = () => {
     return { x, y }
 }
 
-export {useMouse};
+export { useMouse }
