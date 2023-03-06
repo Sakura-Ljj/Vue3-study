@@ -2,22 +2,23 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 16:08:48
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-02-14 18:03:31
+ * @LastEditTime: 2023-03-02 16:40:13
  * @FilePath: \vue3project\src\router\index.js
- * @Description: 
+ * @Description:
  */
-import {createRouter, createWebHashHistory} from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router'
+// import { createRouter, createWebHashHistory } from './grouter/index'
 
 const routes = [
     {
         path: '/',
         name: 'vue3BasicPractice',
-        component: () => import('../pages/vue3BasicPractice.vue'),
+        component: () => import('../pages/vue3BasicPractice.vue')
     },
     {
         path: '/vuexPractice',
         name: 'vuexPractice',
-        component: () => import('../pages/vuexPractice.vue'),
+        component: () => import('../pages/vuexPractice.vue')
     }
 ]
 
@@ -26,4 +27,4 @@ const router = createRouter({
     routes
 })
 
-export default router;
+export default router

@@ -211,6 +211,8 @@ const store = createStore({
         }
     }
 })
+
+export default store
 ```
 
 ##### 注册Vuex
@@ -223,7 +225,7 @@ app.use(vuex)
 	.mount('#app')
 ```
 
-##### state的获取 | state的修改(commit)
+##### state的获取 | state的修改(mutations)
 
 ```vue
 <!-- 在组件内获取和修改store中的数据 -->
@@ -250,7 +252,7 @@ const add = () => {
 
 ##### 浅浅实现一个简易Vuex
 
-利用`vue`中的`inject`和`provide`方法
+利用`vue`中的`inject`和`provide`方法, 进实现了`state`及`mutations`
 
 ```js
 import { inject, reactive } from 'vue'
@@ -295,5 +297,236 @@ class Store {
     }
 }
 export { useStore, createStore }
+```
+
+##### getters
+
+`getters`在`Vuex`中的作用类似与`computed`
+
+```js
+import {createStore} from 'vuex'
+
+const store = createStore({
+    state() {
+        return {
+            count: 0
+        }
+    },
+    getters: {
+        double(state) {
+            return state.count * 2
+        }
+    },
+    mutations: {
+        add(state) {
+            state.count++
+        }
+    }
+})
+
+export default store
+```
+
+在`Vue`件中调用
+
+```vue
+<template>
+	<div>
+		<span>{{count}} * 2 = {{double}}</span>
+        <button @click="add">Add</button>
+	</div>
+</template>
+
+<script setup>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+    
+const { state, commit, getters } = useStore()
+const count = computed(() => state.count)
+const double = computed(() => getters.double)
+
+const add = () => {
+    commit('add')
+}
+</script>
+```
+
+##### actions
+
+当数据需要异步修改的时候则把这些逻辑放在`actions`中, 一般是数据是通过接口请求回来进行处理
+
+需要注意的是`actions`并不能直接修改`state`数据, 而是通过`mutations`去修改, 在`actions`中声明的方法都可以在参数中结构出`commit`用于执行`mutations`中的方法, 来对`state`数据进行修改
+
+```js
+import { createStore } from 'vuex'
+
+const store = createStore({
+    state() {
+        return {
+            count: 0
+        }
+    },
+    getters: {
+        double(state) {
+            return state.count * 2
+        }
+    },
+    mutations: {
+        add(state) {
+            state.count++
+        }
+    },
+    actions: {
+        asyncAdd({commit}) {
+            setTimeout(() => { // 使用setTimeout模拟异步请求
+                commit('add')
+            },1000)
+        }
+    }
+})
+```
+
+在`Vue`组件中使用`dispatch`调用
+
+```vue
+<template>
+	<div>
+		<span>{{count}} * 2 = {{double}}</span>
+        <button @click="add">Add</button>
+        <button @click="asyncAdd">Async Add</button>
+	</div>
+</template>
+
+<script setup>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+    
+const { state, commit, getters, dispatch } = useStore()
+const count = computed(() => state.count)
+const double = computed(() => getters.double)
+
+const add = () => {
+    commit('add')
+}
+
+const asyncAdd = () => {
+    dispatch('asyncAdd')
+}
+</script>
+```
+
+#### vue-router
+
+- 以前前端的开发模式
+  - 以前的前端是不能控制路由的, 需要依赖后端项目的路由系统, 一般前端项目会部署在后端项目的模板里, 当用户访问路由的时候, 就会请求到后端路由系统, 后端路由系统就会匹配对应的模板, 发送给浏览器渲染, 这样的优点是前端开发会相对快速, 缺点是每次切换路由都需要刷新一次页面, 交互体验及性能都不太好
+- 现在的前端开发模式
+  - 现在的前端可以控制路由, 不在需要依赖后端, 做到了前后端可以单独部署, 及前后端分离, 现在不论是什么URL地址都只渲染一个前端入口文件 index.html, 当用户访问路由时会通过 js 去计算当前路由地址匹配的组件然后进行渲染, 这样就不会每次切换路由都刷新页面, 交互体验大大提升, 这就是**单页面应用程序(SPA, single page application)**应用的雏形
+
+##### 路由模式
+
+- **hash**模式
+
+  - **http://www.xxx.com/#/login**
+  - 通过对**hashchange**事件的监听，在**hash**值发生改变时在函数中进行动态的页面切换
+
+  ```js
+  window.addEventListener('hashchange', fn)
+  ```
+
+- **history**模式
+
+  - **http://www.xxx.com/login/**
+  - 随着HTML5的标准发布, 带来了两个API: **pushState** 和 **replaceState**, 通过这两个API改变URL地址, 会触发**popstate**事件，通过监听**popstate**事件, 在通过**pushState** 或 **replaceState** 修改路由时在函数中实现对页面的更新操作
+
+  ```js
+  window.addEventListener('popstate', fn)
+  ```
+
+##### 浅浅实现一个简易的hash路由
+
+```js
+import { ref, inject } from 'vue'
+import RouterView from './RouterView.vue'
+import RouterLink from './RouterLink.vue'
+
+const ROUTER_KEY = '__router__'
+
+const createRouter = (options) => {
+    return new Router(options)
+}
+
+const useRouter = () => {
+    return inject(ROUTER_KEY)
+}
+
+const createWebHashHistory = () => {
+    const bindEvents = (fn) => {
+        window.addEventListener('hashchange', fn)
+    }
+    return {
+        bindEvents,
+        url: window.location.hash.slice(1) || '/' // 当前页面的 url
+    }
+}
+
+class Router {
+    constructor (options) {
+        this.history = options.history
+        this.routes = options.routes
+        this.current = ref(this.history.url)
+
+        this.history.bindEvents(() => {
+            this.current.value = window.location.hash.slice(1)
+        })
+    }
+
+    install (app) {
+        app.provide(ROUTER_KEY, this)
+        app.component('RouterView', RouterView)
+        app.component('RouterLink', RouterLink)
+    }
+}
+
+export { createRouter, useRouter, createWebHashHistory }
+```
+
+编写RouterView 和 RouterLink
+
+```vue
+<!-- RouterView -->
+<template>
+    <component :is="comp" />
+</template>
+
+<script setup>
+import { computed, defineAsyncComponent } from 'vue'
+import { useRouter } from './index'
+
+const router = useRouter()
+// 当hash值发生改变时router.current会改变就会触发computed重新计算从而匹配对应路径的组件渲染
+const comp = computed(() => {
+    const route = router.routes.find(item => item.path === router.current.value)
+    // 因为路由文件中的组件是通过懒加载的方式引入的所以需要 defineAsyncComponent 去进行处理才可以正常显示
+    return route ? defineAsyncComponent(route.component) : null
+})
+</script>
+```
+
+```vue
+<!-- RouterLink -->
+<template>
+    <a :href="`#${props.to}`">
+        <slot />
+    </a>
+</template>
+
+<script setup>
+import { defineProps } from 'vue'
+
+const props = defineProps({
+    to: { type: String, required: true }
+})
+
+</script>
 ```
 
