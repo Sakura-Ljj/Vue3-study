@@ -19,6 +19,11 @@ const routes = [
         path: '/vuexPractice',
         name: 'vuexPractice',
         component: () => import('../pages/vuexPractice.vue')
+    },
+    {
+        path: '/vuePracticeJSX',
+        name: 'vuexPracticeJSX',
+        component: () => import('../pages/vuePracticeJSX.vue')
     }
 ]
 

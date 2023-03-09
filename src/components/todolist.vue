@@ -2,29 +2,32 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 17:33:31
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-02-23 16:34:36
+ * @LastEditTime: 2023-03-07 11:04:44
  * @FilePath: \vue3project\src\components\todolist.vue
  * @Description:
 -->
 <template>
-    <div>
-        <div class="tw-flex tw-text-center tw-text-white">
+    <div class="tw-w-1/2 tw-mx-auto">
+        <div class="tw-mb-5 tw-flex">
+            <span class="tw-mr-3">输入事项</span>
+            <div>
+                <input v-model="title" type="text" @keydown.enter="addTodo" />
+                <div v-if="showErrMsg" class="tw-text-rose-500">输入事项不允许为空</div>
+            </div>
+        </div>
+
+        <div class="tw-flex tw-text-center tw-text-white tw-mb-5">
             <div class="tw-flex-1 tw-mr-5 tw-bg-gray tw-rounded-md">待完成({{active}})</div>
             <div class="tw-flex-1 tw-bg-gray tw-rounded-md">所有事项({{all}})</div>
         </div>
 
-        <div class="tw-mb-5">
-            <span>输入事项: </span>
-            <input v-model="title" type="text" @keydown.enter="addTodo" />
-            <div v-if="showErrMsg" class="tw-text-rose-500 tw-text-center">输入事项不允许为空</div>
+        <div class="tw-mb-3">
+            <button @click="clear">清理已完成事项</button>
         </div>
 
-        <div class="tw-flex tw-mb-3 tw-justify-around">
-            <div>
-                <span>全选</span>
-                <input v-model="allDone" type="checkbox" />
-            </div>
-            <button @click="clear">清理已完成事项</button>
+        <div>
+            <input v-model="allDone" type="checkbox" class="tw-mr-3" />
+            <span>全选</span>
         </div>
 
         <ul v-if="todos.length">

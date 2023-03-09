@@ -2,23 +2,24 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 16:10:25
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-03-02 17:26:18
+ * @LastEditTime: 2023-03-07 10:59:41
  * @FilePath: \vue3project\src\pages\vue3BasicPractice.vue
  * @Description:
 -->
 
 <template>
-    <h1>This is Home</h1>
-    <Todolist />
+    <TodoList />
     <!-- <Rate :score="score" theme="orange" @updateRate="updateRate"/> -->
     <!-- 使用 v-model 则可以省去传递 updateRate 方法-->
-    <Rate v-model="score" theme="orange" />
-    <h1>你的评分是{{score}}</h1>
+    <div class="tw-float-right">
+        <Rate v-model="score" theme="orange" />
+        <div>服务评分{{score}}星</div>
+    </div>
 </template>
 <script setup>
 import { ref } from 'vue'
-import Todolist from '../components/todolist.vue'
-import Rate from '../components/rate.vue'
+import TodoList from '../components/TodoList.vue'
+import Rate from '../components/Rate.vue'
 
 const score = ref(3)
 

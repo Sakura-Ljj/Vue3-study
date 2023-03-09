@@ -530,3 +530,134 @@ const props = defineProps({
 </script>
 ```
 
+#### Vue3中的JSX
+
+##### h函数
+
+**h函数**可以创建一个虚拟DOM节点, 可以实现一个动态化场景比较多的需求, 比如动态化需求较大的组件
+
+比如实现一个标签名需要动态处理的场景
+
+```jsx
+import { defineComponent, h } from 'vue'
+// 使用defineComponent定义一个组件, 组件内部配置props和setup
+export default defineComonent({
+    const props: {
+    	level: {
+    		type: Number,
+    		required: true
+		}
+	}
+    setup(props, {slots}) {
+    	return () => h(
+        	'h' + props.level, // 标签名
+            {}, // prop 或 attribute
+            slots.default() // 子节点
+        )
+	}
+})
+```
+
+然后在vue文件中引入
+
+```vue
+<template>
+<Heading :level="1">
+	Hello World
+</Heading>
+<!-- 显示出来就是 -->
+<h1>
+	Hello World    
+</h1>
+</template>
+
+<script setup>
+import Heading from '...';
+</script>
+```
+
+**h函数**可以处理动态性比较高的场景, 但如果场景过于复杂, 写起来会十分繁琐, 需要各种对象的嵌套, **h函数**是返回虚拟DOM, 所以可以换成更方便的**JSX**语法
+
+```jsx
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+    const props = {
+    	level: {
+    		type: Number,
+    		required: true
+		}
+	}
+    setup(props, {slots}){
+        const tag = `h${props.level}`
+    	return () => <tag>{slots.default()}</tag>
+	}
+})
+```
+
+##### Vue3中写JSX
+
+需要先安装一个**JSX**的插件, 然后在构建工具vite中进行配置
+
+```js
+import vue from '@vitejs/plugin-vue'
+import vuejsx from '@vitejs/plugin-vue-jsx'
+
+export default defineConfig({
+    plugins: [vue(), vuejsx()]
+})
+```
+
+使用**jsx**实现一个简易的todoList
+
+```jsx
+import { defineComponent, reactive } from 'vue'
+
+export default defineComponent({
+    setup(){
+        const data = reactive({
+            title: '',
+            todo: [
+                {
+                    title: '吃饭',
+                    done: true
+                },
+                {
+                    title: '睡觉',
+                    done: false
+                },
+                {
+                    title: '打豆豆',
+                    done: false
+                }
+            ]
+        })
+        const addTodo = () => {
+            if(!data.title) return
+            data.todo.push({ title: data.title, done: false })
+            data.title = ''
+        }
+        return () => 
+        	<div>
+        		<input type="text" vModel={data.title}/>
+            	<button onClick={addTodo}>添加</button>
+            	<ul>
+            		{
+                        data.todo.length
+                        	? data.todo.map(item => {
+                            	return <li>
+                            		<input type="checkbox" vModel={item.done}/>
+                                	<span>item.title</span>
+                            	</li>
+                        	})
+                        	: <li>no Data</li>
+                    }
+            	</ul>
+        	</div>
+    }
+})
+```
+
+##### template与JSX的区别
+
+template语法相对于JSX语法来说比较固定, 灵活性没有JSX高, 在需要支持动态性更高的需求的时候, 因为template的语法限制, 就不能更优雅的去支持这种高动态性的需求, JSX还可以在一个文件中返回多个组件, 而template中只能返回一个组件, 但template的优势是对于虚拟DOM的计算优化更好, 在Vue3中template的语法会尽可能高效的利用缓存, 在虚拟DOM计算Diff过程中可以做到更快, 在Vue3中如何选择template和JSX, 大部分时候最优的还是template语法, 只有在一些动态性较高的需求的时候可以尝试使用JSX看看能否更优雅的实现

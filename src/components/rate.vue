@@ -7,7 +7,7 @@
  * @Description:
 -->
 <template>
-    <div :class="themeObj[props.theme]">
+    <div :class="[themeObj[props.theme], 'tw-tw-float-right']">
         <div class="tw-relative tw-inline-block tw-text-lg tw-cursor-pointer">
             <span v-for="num in 5" :key="num" @mouseover="mouseOver(num)">☆</span>
             <span class="tw-absolute tw-inline-block tw-inset-0 tw-overflow-hidden" :style="fontWidth">

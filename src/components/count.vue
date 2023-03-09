@@ -2,12 +2,12 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-02-14 17:55:56
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-02-27 15:26:38
+ * @LastEditTime: 2023-03-07 11:21:32
  * @FilePath: \vue3project\src\components\count.vue
  * @Description:
 -->
 <template>
-    <div class="tw-mt-5">
+    <div>
         <div class="tw-mb-5">
             <button class="tw-mr-5" @click="add">Add</button>
             <button @click="asyncAdd">Async Add</button>
