@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 16:08:48
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-03-02 16:40:13
+ * @LastEditTime: 2023-05-06 16:12:22
  * @FilePath: \vue3project\src\router\index.js
  * @Description:
  */
@@ -24,6 +24,11 @@ const routes = [
         path: '/vuePracticeJSX',
         name: 'vuexPracticeJSX',
         component: () => import('../pages/vuePracticeJSX.vue')
+    },
+    {
+        path: '/indexPage',
+        name: 'indexPage',
+        component: () => import('../pages/indexPage.vue')
     }
 ]
 

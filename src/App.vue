@@ -2,36 +2,41 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 15:49:46
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-03-06 19:25:44
+ * @LastEditTime: 2023-05-06 19:21:58
  * @FilePath: \vue3project\src\App.vue
  * @Description:
 -->
 <template>
     <div>
         <div class="header tw-mb-3">
-            <div class="tw-max-w-7xl tw-mx-auto tw-flex tw-items-center tw-justify-between tw-py-3">
-                <div class="logo" />
+            <div class="tw-max-w-full tw-flex tw-justify-between tw-mx-60">
+                <div class="logo tw-text-blue-400">LOGO</div>
                 <ul class="tw-flex">
                     <li
                         v-for="item in data.navBar"
                         :key="item.path"
-                        :class="['tw-mr-5', 'tw-cursor-pointer', 'hover:tw-text-blue-400', data.active_path === item.path ? 'tw-text-blue-400' : '']"
+                        :class="['nav-item', route.path === item.path ? 'curr-nav' : '']"
                         @click="toPath(item.path)">
                         {{item.text}}
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="tw-container tw-mx-auto">
+        <div v-if="route.path.includes('indexPage')" class="carousel">
+            <Carousel />
+        </div>
+        <div class="main">
             <router-view />
         </div>
     </div>
 </template>
 <script setup>
 import { reactive } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import Carousel from './components/Carousel.vue'
 const router = useRouter()
-
+const route = useRoute()
+console.log(route.fullPath)
 const data = reactive({
     navBar: [
         {
@@ -45,13 +50,15 @@ const data = reactive({
         {
             text: 'Vue中的JSX',
             path: '/vuePracticeJSX'
+        },
+        {
+            text: 'IS动漫社模拟官网',
+            path: '/indexPage'
         }
-    ],
-    active_path: '/'
+    ]
 })
 
 const toPath = (path) => {
-    data.active_path = path
     router.push(path)
 }
 
@@ -60,10 +67,29 @@ const toPath = (path) => {
 .logo {
     width: 50px;
     height:50px;
-    background-color: aquamarine;
+    line-height: 50px;
+    cursor: pointer;
 }
 
 .header {
     border-bottom: 1px solid #989a9c;
 }
+
+.nav-item {
+    @apply tw-mr-5 tw-cursor-pointer hover:tw-text-blue-400 tw-flex tw-items-center;
+}
+
+.curr-nav {
+    @apply tw-text-blue-400;
+    border-bottom: 2px solid;
+}
+
+.carousel {
+    @apply tw-m-auto;
+    width: 1851px;
+}
+.main {
+    @apply tw-container tw-m-auto;
+}
+
 </style>
