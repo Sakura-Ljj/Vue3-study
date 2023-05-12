@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 15:49:46
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-05-06 19:21:58
+ * @LastEditTime: 2023-05-11 16:52:20
  * @FilePath: \vue3project\src\App.vue
  * @Description:
 -->
@@ -36,7 +36,6 @@ import { useRouter, useRoute } from 'vue-router'
 import Carousel from './components/Carousel.vue'
 const router = useRouter()
 const route = useRoute()
-console.log(route.fullPath)
 const data = reactive({
     navBar: [
         {
@@ -89,7 +88,7 @@ const toPath = (path) => {
     width: 1851px;
 }
 .main {
-    @apply tw-container tw-m-auto;
+    @apply tw-container tw-m-auto tw-relative;
 }
 
 </style>
