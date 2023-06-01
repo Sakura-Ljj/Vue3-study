@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 15:49:46
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-05-11 16:52:20
+ * @LastEditTime: 2023-05-30 15:21:51
  * @FilePath: \vue3project\src\App.vue
  * @Description:
 -->
@@ -10,7 +10,7 @@
     <div>
         <div class="header tw-mb-3">
             <div class="tw-max-w-full tw-flex tw-justify-between tw-mx-60">
-                <div class="logo tw-text-blue-400">LOGO</div>
+                <div class="logo tw-text-blue-400 tw-py-2">LOGO</div>
                 <ul class="tw-flex">
                     <li
                         v-for="item in data.navBar"
@@ -71,7 +71,13 @@ const toPath = (path) => {
 }
 
 .header {
-    border-bottom: 1px solid #989a9c;
+    border-bottom: 1px solid #DDE6ED;
+    position: sticky;
+    top: 0;
+    box-shadow: 0 1px 0 0 rgba(0,0,0,.1);
+    background: #fff;
+    opacity: .95;
+    z-index: 999;
 }
 
 .nav-item {

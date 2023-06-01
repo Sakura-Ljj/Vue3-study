@@ -28,7 +28,7 @@ const routes = [
     {
         path: '/indexPage',
         name: 'indexPage',
-        component: () => import('../pages/indexPage.vue')
+        component: () => import('../pages/indexPage/index.vue')
     }
 ]
 

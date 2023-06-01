@@ -11,7 +11,8 @@
 module.exports = {
     purge: [
         // 这里是用于构建的时候可以检测以下路径定义的文件用到的类名, 没用到的会在构建的时候删除, 属于按需加载
-        './src/pages/*.vue',
+        './src/pages/*/*.vue',
+        './src/pages/*/components/*.vue',
         './src/components/*.vue',
         './src/*.vue'
     ],
