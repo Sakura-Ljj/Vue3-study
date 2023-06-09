@@ -1,9 +1,9 @@
 <!--
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-05-06 16:09:47
- * @LastEditors: DESKTOP-H44236O\Sora 1430008132@qq.com
- * @LastEditTime: 2023-06-01 23:49:25
- * @FilePath: \Vue3-study\src\pages\indexPage\index.vue
+ * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
+ * @LastEditTime: 2023-06-02 11:02:23
+ * @FilePath: \vue3project\src\pages\indexPage\index.vue
  * @Description:
 -->
 <template>
@@ -28,7 +28,7 @@
 <script setup>
 import { reactive } from 'vue'
 import Section from './components/section.vue'
-import { getAssetURL } from '../../utils/importImage'
+import { getAssetURL } from '@utils/importImage'
 
 const data = reactive({
     page_info: [

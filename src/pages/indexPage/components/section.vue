@@ -7,7 +7,7 @@
  * @Description:
 -->
 <template>
-    <img src="../../../assets/icons/consult.svg" alt="" class="tw-w-14 tw-h-14" />
+    <img src="@assets/icons/consult.svg" alt="" class="tw-w-14 tw-h-14" />
     <h1 class="tw-my-5">{{props.pageInfo.title}}</h1>
     <div class="tw-text-blue-400 tw-mb-3">{{props.pageInfo.tips}}</div>
     <div class="tw-text-gray-400">{{props.pageInfo.content}}</div>
