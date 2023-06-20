@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-05-06 16:09:47
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-06-02 11:02:23
+ * @LastEditTime: 2023-06-20 14:26:42
  * @FilePath: \vue3project\src\pages\indexPage\index.vue
  * @Description:
 -->
@@ -26,9 +26,10 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive, onMounted } from 'vue'
 import Section from './components/section.vue'
 import { getAssetURL } from '@utils/importImage'
+import axios from '@utils/axios'
 
 const data = reactive({
     page_info: [
@@ -58,7 +59,12 @@ const data = reactive({
                 btn_text: '触发跳转详情'
             }
         }
-    ]
+    ],
+    test: ''
+})
+onMounted(async () => {
+    const res = await axios.post('user/login')
+    console.log(res)
 })
 </script>
 

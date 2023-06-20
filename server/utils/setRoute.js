@@ -2,18 +2,18 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-06-05 19:27:58
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-06-09 17:44:03
+ * @LastEditTime: 2023-06-14 11:17:23
  * @FilePath: \vue3project\server\utils\setRoute.js
  * @Description: 全局路由配置
  */
 
-const ErrorCode = require('../config/errorCode')
+const errorCode = require('../config/errorCode')
 
 const setRoute = (method, handlerFunc) => {
     const handle = async (req, res) => {
         // 过滤 IP
         const requestClientIp = getClientIp(req)
-        if (!requestClientIp) return 'err'
+        if (!requestClientIp) return errorCode.FORBIDDEN_ERROR_CODE
 
         // 暂时只有 GET 和 POST 请求先这样处理着
         let event
@@ -46,9 +46,9 @@ const setRoute = (method, handlerFunc) => {
             }
             console.log(`req end path = ${req.path}, clientIp = ${requestClientIp}, params = ${params}, costTime = ${new Date().getTime() - startTime}`)
         } catch (e) {
-            if (e instanceof ErrorCode) {
+            if (errorCode[e.code]) {
                 result = {
-                    code: e.code,
+                    code: errorCode[e.code],
                     msg: e.message,
                     data: null
                 }

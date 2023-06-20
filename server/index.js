@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-03-14 15:51:53
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-06-09 17:44:58
+ * @LastEditTime: 2023-06-20 15:16:08
  * @FilePath: \vue3project\server\index.js
  * @Description: node 服务配置
  */
@@ -51,7 +51,7 @@ app.all('*', (req, res, next) => {
     // 允许跨域请求 header 携带的东西
     res.header(
         'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept, If-Modified-Since'
+        'Origin, X-Requested-With, Content-Type, Accept, If-Modified-Since, token'
     )
     next()
 })

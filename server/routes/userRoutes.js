@@ -9,8 +9,13 @@
 const routes = [
     {
         path: '/user/login',
-        method: 'get',
+        method: 'post',
         handler: require('../contorller/userContorller').userLoginApi
+    },
+    {
+        path: '/user/getUser',
+        method: 'get',
+        handler: require('../contorller/userContorller').getUserApi
     }
 ]
 
