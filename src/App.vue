@@ -2,14 +2,14 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 15:49:46
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-05-30 15:21:51
+ * @LastEditTime: 2023-07-11 11:57:19
  * @FilePath: \vue3project\src\App.vue
  * @Description:
 -->
 <template>
-    <div>
+    <div v-if="!route.path.includes('login')">
         <div class="header tw-mb-3">
-            <div class="tw-max-w-full tw-flex tw-justify-between tw-mx-60">
+            <div class="tw-max-w-full tw-flex tw-justify-between tw-items-center tw-mx-60">
                 <div class="logo tw-text-blue-400 tw-py-2">LOGO</div>
                 <ul class="tw-flex">
                     <li
@@ -20,6 +20,9 @@
                         {{item.text}}
                     </li>
                 </ul>
+                <div class="login">
+                    <el-button type="primary" @click="toLogin">登录</el-button>
+                </div>
             </div>
         </div>
         <div v-if="route.path.includes('indexPage')" class="carousel">
@@ -29,6 +32,7 @@
             <router-view />
         </div>
     </div>
+    <router-view v-else />
 </template>
 <script setup>
 import { reactive } from 'vue'
@@ -59,6 +63,10 @@ const data = reactive({
 
 const toPath = (path) => {
     router.push(path)
+}
+
+const toLogin = () => {
+    router.push('/login')
 }
 
 </script>

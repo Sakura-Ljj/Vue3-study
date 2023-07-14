@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-06-05 19:27:58
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-06-14 11:17:23
+ * @LastEditTime: 2023-07-14 18:04:43
  * @FilePath: \vue3project\server\utils\setRoute.js
  * @Description: 全局路由配置
  */
@@ -46,9 +46,9 @@ const setRoute = (method, handlerFunc) => {
             }
             console.log(`req end path = ${req.path}, clientIp = ${requestClientIp}, params = ${params}, costTime = ${new Date().getTime() - startTime}`)
         } catch (e) {
-            if (errorCode[e.code]) {
+            if (e.code) {
                 result = {
-                    code: errorCode[e.code],
+                    code: e.code,
                     msg: e.message,
                     data: null
                 }
@@ -59,7 +59,7 @@ const setRoute = (method, handlerFunc) => {
                     data: null
                 }
             }
-            console.log(`req error path = ${req.path}, clientIp = ${requestClientIp}, params = ${JSON.stringify(event)}`)
+            console.error(`req error path = ${req.path}, clientIp = ${requestClientIp}, params = ${JSON.stringify(event)}, err = ${e}`)
         }
         res.send(result)
     }

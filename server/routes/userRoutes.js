@@ -13,6 +13,11 @@ const routes = [
         handler: require('../contorller/userContorller').userLoginApi
     },
     {
+        path: '/user/register',
+        method: 'post',
+        handler: require('../contorller/userContorller').userRegisterApi
+    },
+    {
         path: '/user/getUser',
         method: 'get',
         handler: require('../contorller/userContorller').getUserApi

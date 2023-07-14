@@ -661,3 +661,18 @@ export default defineComponent({
 ##### template与JSX的区别
 
 template语法相对于JSX语法来说比较固定, 灵活性没有JSX高, 在需要支持动态性更高的需求的时候, 因为template的语法限制, 就不能更优雅的去支持这种高动态性的需求, JSX还可以在一个文件中返回多个组件, 而template中只能返回一个组件, 但template的优势是对于虚拟DOM的计算优化更好, 在Vue3中template的语法会尽可能高效的利用缓存, 在虚拟DOM计算Diff过程中可以做到更快, 在Vue3中如何选择template和JSX, 大部分时候最优的还是template语法, 只有在一些动态性较高的需求的时候可以尝试使用JSX看看能否更优雅的实现
+
+#### Vite中配置process.env.NODE_ENV
+
+**Vite**配置环境变量的方式与**webpack**不同, **webpack**中配置环境变量可以直接在package.json文件的script中直接进行配置, 获取方式也不一样, **Vite**中使用`process.env.NODE_ENV`是获取不到环境变量的, 需要使用`import.meta.env`
+
+在**nodejs**中配置环境变量使用了一个`cross-env`的依赖, 这个依赖可以解决不同的系统环境下配置环境变量方式不同的问题, 使用方法只需要在script中配置对应的启动命令即可
+
+```json
+"script": {
+    "start:dev": "cross-env NODE_ENV=dev node index.js", // 后面的路径是nodejs的启动文件
+    "start": "cross-env NODE_ENV=prod node index.js"
+}
+// 启动nodejs的时候用对应的命令就可以设置对应的环境变量
+```
+

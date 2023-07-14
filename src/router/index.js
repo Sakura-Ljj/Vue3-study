@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 16:08:48
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-05-06 16:12:22
+ * @LastEditTime: 2023-07-11 11:49:44
  * @FilePath: \vue3project\src\router\index.js
  * @Description:
  */
@@ -29,6 +29,11 @@ const routes = [
         path: '/indexPage',
         name: 'indexPage',
         component: () => import('../pages/indexPage/index.vue')
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import('../pages/login/index.vue')
     }
 ]
 

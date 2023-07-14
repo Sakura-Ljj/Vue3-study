@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-03-14 15:51:53
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-06-20 15:16:08
+ * @LastEditTime: 2023-06-25 15:43:41
  * @FilePath: \vue3project\server\index.js
  * @Description: node 服务配置
  */
@@ -28,7 +28,8 @@ redisClient.on('error', (e) => {
 
 const contextPath = '/api'
 const requestLimit = '10240kb'
-const port = 3000
+const port = process.env.NODE_ENV === 'development' ? 3000 : ''
+const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost' : ''
 const app = express()
 
 // 处理 POST 请求的请求体
@@ -81,6 +82,6 @@ routes.forEach(route => {
 })
 
 service.listen(port, () => {
-    const url = `http://localhost:${port + contextPath}`
+    const url = `${baseURL}:${port + contextPath}`
     console.log(`service start at ${url}, env = ${process.env.NODE_ENV}`)
 })
