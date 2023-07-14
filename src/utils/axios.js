@@ -35,7 +35,7 @@ myAxios.interceptors.response.use(({ data, config, headers, request }) => {
     }
     if (data.code !== 200) {
         ElMessage.error(data.msg)
-        return {}
+        return Promise.reject(data)
     }
     return {
         resultConfig,
