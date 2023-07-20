@@ -150,6 +150,7 @@ onMounted(async () => {
   @apply tw-container tw-m-auto tw-relative;
 }
 
+/* element plus 的 dropdown有bug focus-visible的时候会显示一个黑色的外边框 */
 .user-info:focus-visible {
 outline: unset;
 }
