@@ -2,18 +2,22 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-06-05 19:27:58
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-07-14 18:04:43
+ * @LastEditTime: 2023-07-20 14:20:48
  * @FilePath: \vue3project\server\utils\setRoute.js
  * @Description: 全局路由配置
  */
 
 const errorCode = require('../config/errorCode')
+const { myError } = require('../utils/commonUtils')
 
-const setRoute = (method, handlerFunc) => {
+const setRoute = (method, handlerFunc, isCheckSession = false) => {
     const handle = async (req, res) => {
         // 过滤 IP
         const requestClientIp = getClientIp(req)
-        if (!requestClientIp) return errorCode.FORBIDDEN_ERROR_CODE
+        if (!requestClientIp) throw myError(errorCode.FORBIDDEN_ERROR_CODE, '无权限访问')
+
+        // 是否检测登录态
+        if (isCheckSession && !req.session.userInfo) throw myError(errorCode.FORBIDDEN_ERROR_CODE, '登录信息已失效')
 
         // 暂时只有 GET 和 POST 请求先这样处理着
         let event
@@ -38,11 +42,18 @@ const setRoute = (method, handlerFunc) => {
 
             result = await handlerFunc(event, req, res)
 
-            // 封装相应结果
-            result = {
-                code: 200,
-                msg: 'suc',
-                data: result
+            // 不需要封装相应结果的接口
+            const filterPath = [
+                '/api/common/getImage'
+            ]
+
+            if (!filterPath.includes(req.path)) {
+                // 封装相应结果
+                result = {
+                    code: 200,
+                    msg: 'suc',
+                    data: result
+                }
             }
             console.log(`req end path = ${req.path}, clientIp = ${requestClientIp}, params = ${params}, costTime = ${new Date().getTime() - startTime}`)
         } catch (e) {

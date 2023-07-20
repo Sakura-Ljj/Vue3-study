@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-07-11 11:50:31
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-07-14 19:23:12
+ * @LastEditTime: 2023-07-17 19:23:45
  * @FilePath: \vue3project\src\pages\login\index.vue
  * @Description: 登录页面
 -->
@@ -30,10 +30,14 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import userApi from '@api/userApi'
+import { useUserStore } from '@store/userStore'
 import { ElMessage } from 'element-plus'
 
 const { login, register } = userApi
+const user = useUserStore()
+const router = useRouter()
 
 const ruleFormRef = ref()
 
@@ -52,6 +56,8 @@ const submit = async ruleFormRef => {
         await ruleFormRef.validate()
         await login(form)
         ElMessage.success('登录成功')
+        await user.getUserInfo()
+        router.replace('/indexPage')
     } catch (e) {}
 }
 

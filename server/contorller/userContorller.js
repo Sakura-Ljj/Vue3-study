@@ -2,14 +2,14 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-06-09 17:33:44
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-07-14 19:06:00
+ * @LastEditTime: 2023-07-19 15:14:00
  * @FilePath: \vue3project\server\contorller\userContorller.js
  * @Description: 用户相关 CGI
  */
 const requestData = require('../mysql')
 const { pbkdf2Encrypt, pbkdf2Decrypt } = require('../utils/crypto')
 const errorCode = require('../config/errorCode')
-const myError = require('../utils/myError')
+const { myError } = require('../utils/commonUtils')
 
 async function userLoginApi ({ userName, password }, req, res) {
     if (!userName || !password) throw myError(errorCode.REQUEST_PARAMS_ERROR_CODE, '参数错误')
@@ -30,6 +30,10 @@ async function userLoginApi ({ userName, password }, req, res) {
     req.session.userInfo = { userId }
 }
 
+function userLogoutApi (event, req) {
+    req.session.userInfo = undefined
+}
+
 async function userRegisterApi ({ password, userName }) {
     if (!userName || !password) throw myError(errorCode.REQUEST_PARAMS_ERROR_CODE, '参数错误')
 
@@ -48,17 +52,31 @@ async function userRegisterApi ({ password, userName }) {
         userPassword: result,
         salt
     }
-    await requestData({
+    const { insertId } = await requestData({
         sql: 'insert into is_user_account set ?',
         values: [insertData]
     })
+
+    await requestData({
+        sql: 'insert into is_user_user set ?',
+        values: [{ userId: insertId }]
+    })
 }
 
-function getUserApi (event, req, res) {
+async function getUserApi (event, req, res) {
+    if (!req.session.userInfo) return {}
+
+    const { userId } = req.session.userInfo
+
+    return requestData({
+        sql: 'select * from is_user_info where userId = ? limit 1',
+        values: [userId]
+    }).then(res => res[0])
 }
 
 module.exports = {
     userLoginApi,
     getUserApi,
-    userRegisterApi
+    userRegisterApi,
+    userLogoutApi
 }

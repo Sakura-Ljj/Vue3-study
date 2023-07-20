@@ -7,5 +7,9 @@
  * @Description: 所有路由配置集合
  */
 const userRoutes = require('./userRoutes')
+const commonRoutes = require('./commonRouters')
 
-module.exports = [...userRoutes]
+module.exports = [
+    ...userRoutes,
+    ...commonRoutes
+]

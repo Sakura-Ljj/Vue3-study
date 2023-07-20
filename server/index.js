@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-03-14 15:51:53
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-06-25 15:43:41
+ * @LastEditTime: 2023-07-17 10:40:56
  * @FilePath: \vue3project\server\index.js
  * @Description: node 服务配置
  */
@@ -78,7 +78,7 @@ const service = http.createServer(app)
 
 // 设置路由
 routes.forEach(route => {
-    app[route.method](contextPath + route.path, setRoute(route.method, route.handler))
+    app[route.method](contextPath + route.path, setRoute(route.method, route.handler, route.isCheckSession))
 })
 
 service.listen(port, () => {
