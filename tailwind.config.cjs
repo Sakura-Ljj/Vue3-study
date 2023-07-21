@@ -14,6 +14,7 @@ module.exports = {
         './src/pages/*/*.vue',
         './src/pages/*/components/*.vue',
         './src/components/*.vue',
+        './src/pages/*.vue',
         './src/*.vue'
     ],
 

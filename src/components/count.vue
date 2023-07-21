@@ -9,25 +9,17 @@
 <template>
     <div>
         <div class="tw-mb-5">
-            <button class="tw-mr-5" @click="add">Add</button>
-            <button @click="asyncAdd">Async Add</button>
+            <button class="tw-mr-5" @click="practice.add">Add</button>
+            <button @click="practice.asyncAdd">Async Add</button>
         </div>
-        <div class="tw-text-center">{{count}} * 2 = {{double}}</div>
+        <div class="tw-text-center">{{practice.count}} * 2 = {{practice.double}}</div>
     </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
 // import { useStore } from '../store/gvuex'
-import { useStore } from 'vuex'
+import { usePractice } from '../store/practiceStore'
 
-const { state, commit, getters, dispatch } = useStore()
-const count = computed(() => state.count)
-const double = computed(() => getters.double)
-const add = () => {
-    commit('add')
-}
-const asyncAdd = () => {
-    dispatch('asyncAdd')
-}
+const practice = usePractice()
+
 </script>

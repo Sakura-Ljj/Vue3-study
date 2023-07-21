@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-03-14 15:51:53
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-07-17 10:40:56
+ * @LastEditTime: 2023-07-21 11:31:25
  * @FilePath: \vue3project\server\index.js
  * @Description: node 服务配置
  */
@@ -64,7 +64,7 @@ const sessionOptions = {
     secret: 'Sora', // 签名密钥
     resave: false, // 强制保存, 当 session 没有被修改也要重新保存
     saveUninitialized: true, // 如果原先没有 session 那么就设置, 否则不设置(强制保存未初始化的 session)
-    rolling: true, // 每次请求更新有效时长
+    rolling: false, // 每次请求更新有效时长
     cookie: {
         // domain: ''  // 需要共享 cookie 时设置
         maxAge: 1 * 24 * 60 * 60 * 1000, // 一天后过期
