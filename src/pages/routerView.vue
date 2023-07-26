@@ -2,14 +2,14 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 15:49:46
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-07-20 17:32:05
+ * @LastEditTime: 2023-07-25 11:26:09
  * @FilePath: \vue3project\src\pages\routerView.vue
  * @Description:
 -->
 <template>
     <div v-if="pageData.navBar.some(item => item.path === route.path)">
         <div class="header tw-mb-3">
-            <div class="tw-max-w-full tw-flex tw-items-center tw-justify-between tw-mx-60">
+            <div class="tw-max-w-full tw-flex tw-justify-between tw-mx-60">
                 <div class="logo tw-text-blue-400 tw-py-2">LOGO</div>
                 <ul class="tw-flex">
                     <li
@@ -20,18 +20,18 @@
                         {{item.text}}
                     </li>
                 </ul>
-                <div v-if="!pageData.loading">
+                <div v-if="!pageData.loading" class="tw-flex tw-items-center">
                     <div v-if="user.userInfo.userId">
                         <el-dropdown>
                             <div class="tw-flex tw-cursor-pointer tw-items-center user-info">
                                 <el-avatar :src="user.userInfo.avatar ? `/api/common/getImage?url=${user.userInfo.avatar}` : ''" class="tw-mr-2">
                                     <el-icon size="30"><UserFilled /></el-icon>
                                 </el-avatar>
-                                <div>NickName</div>
+                                <div>{{user.userInfo.nickName || 'NickName'}}</div>
                             </div>
                             <template #dropdown>
                                 <el-dropdown-menu>
-                                    <el-dropdown-item icon="User" @click="toEditUserInfo">更改个人信息</el-dropdown-item>
+                                    <el-dropdown-item icon="User" @click="toEditUserInfo">查看个人信息</el-dropdown-item>
                                     <el-dropdown-item icon="Lock">更改密码</el-dropdown-item>
                                     <el-dropdown-item divided @click="userLogout">退出登录</el-dropdown-item>
                                 </el-dropdown-menu>

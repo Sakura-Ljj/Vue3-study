@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 15:49:46
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-07-17 14:53:05
+ * @LastEditTime: 2023-07-26 10:25:36
  * @FilePath: \vue3project\src\main.js
  * @Description:
  */
@@ -23,6 +23,11 @@ const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
+
+// 全局input框自动聚焦插件
+app.directive('focus', el => {
+    el.focus()
+})
 
 app.use(router)
     // .use(store)

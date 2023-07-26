@@ -23,5 +23,9 @@ export default {
 
     getUserInfo: () => {
         return axios.get('/user/getUser')
+    },
+
+    editUser: data => {
+        return axios.post('/user/editUser', data)
     }
 }

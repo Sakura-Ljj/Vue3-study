@@ -57,7 +57,7 @@ const submit = async ruleFormRef => {
         await login(form)
         ElMessage.success('登录成功')
         await user.getUserInfo()
-        router.replace('/indexPage')
+        router.replace('/index/indexPage')
     } catch (e) {}
 }
 

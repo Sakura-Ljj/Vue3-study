@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-06-09 17:33:44
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-07-19 15:14:00
+ * @LastEditTime: 2023-07-26 15:41:32
  * @FilePath: \vue3project\server\contorller\userContorller.js
  * @Description: 用户相关 CGI
  */
@@ -74,9 +74,26 @@ async function getUserApi (event, req, res) {
     }).then(res => res[0])
 }
 
+async function editUserApi ({ nickName, signature, mobile, email, sex }, req) {
+    const updateValue = {
+        nickName,
+        signature,
+        mobile,
+        email,
+        sex
+    }
+    const { userInfo } = req.session
+
+    return requestData({
+        sql: 'update is_user_info set ? where userId = ? limit 1',
+        values: [updateValue, userInfo.userId]
+    })
+}
+
 module.exports = {
     userLoginApi,
     getUserApi,
     userRegisterApi,
-    userLogoutApi
+    userLogoutApi,
+    editUserApi
 }

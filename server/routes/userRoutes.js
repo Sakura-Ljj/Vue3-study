@@ -26,6 +26,12 @@ const routes = [
         path: '/user/getUser',
         method: 'get',
         handler: require('../contorller/userContorller').getUserApi
+    },
+    {
+        path: '/user/editUser',
+        method: 'post',
+        handler: require('../contorller/userContorller').editUserApi,
+        isCheckSession: true
     }
 ]
 
