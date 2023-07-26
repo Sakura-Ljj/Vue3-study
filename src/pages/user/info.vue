@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-07-18 11:25:12
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-07-26 15:09:29
+ * @LastEditTime: 2023-07-26 19:00:35
  * @FilePath: \vue3project\src\pages\user\info.vue
  * @Description: 修改个人信息页面
 -->
@@ -117,12 +117,29 @@ const form = reactive({
     sex: ''
 })
 
+const checkMobile = (rule, value, callback) => {
+    if (!value) return callback(new Error('手机号不得为空'))
+
+    if (!/^(0|86|17951)?(13[0-9]|15[012356789]|166|17[0-9]|18[0-9]|14[57]|19[0-9])[0-9]{8}$/.test(value)) {
+        return callback(new Error('手机号格式有误'))
+    }
+}
+
 const rules = reactive({
-    nickName: [{ required: true, message: '昵称不得为空', trigger: 'blur' }],
-    signature: [{ required: true, message: '个性签名不得为空', trigger: 'blur' }],
-    mobile: [{ required: true, message: '手机号不得为空', trigger: 'blur' }],
-    email: [{ required: true, message: '邮箱不得为空', trigger: 'blur' }],
-    sex: [{ required: true, message: '性别不得为空', trigger: 'blur' }]
+    nickName: [
+        { required: true, message: '昵称不得为空', trigger: 'blur' },
+        { max: 16, message: '昵称不得超过16个字符', trigger: 'blur' }
+    ],
+    signature: [
+        { required: true, message: '个性签名不得为空', trigger: 'blur' },
+        { max: 64, message: '个性签名不得超过64字符', trigger: 'blur' }
+    ],
+    mobile: [{ validator: checkMobile, trigger: 'blur' }],
+    email: [
+        { required: true, message: '邮箱不得为空', trigger: 'blur' },
+        { type: 'email', message: '邮箱格式有误', trigger: 'blur' }
+    ],
+    sex: [{ required: true, message: '性别不得为空', trigger: 'change' }]
 })
 
 onMounted(async () => {
