@@ -123,6 +123,8 @@ const checkMobile = (rule, value, callback) => {
     if (!/^(0|86|17951)?(13[0-9]|15[012356789]|166|17[0-9]|18[0-9]|14[57]|19[0-9])[0-9]{8}$/.test(value)) {
         return callback(new Error('手机号格式有误'))
     }
+
+    callback()
 }
 
 const rules = reactive({
