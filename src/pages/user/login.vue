@@ -49,7 +49,7 @@
                 <!-- 这样传递可以在使用 ruleFormRef 时少获取一级 vaule-->
                 <template v-if="type === 'login'">
                     <el-button type="primary" @click="submit(ruleFormRef)">登录</el-button>
-                    <el-button @click="type = 'register'">注册</el-button>
+                    <el-button @click="toRegister(ruleFormRef)">注册</el-button>
                 </template>
                 <template v-if="type === 'register'">
                     <el-button type="primary" @click="registerUser(ruleFormRef)">确认注册</el-button>
@@ -118,6 +118,11 @@ const submit = async ruleFormRef => {
     } catch (e) {}
 }
 
+const toRegister = ruleFormRef => {
+    ruleFormRef.resetFields()
+    type.value = 'register'
+}
+
 const registerUser = async ruleFormRef => {
     try {
         await ruleFormRef.validate()
@@ -127,8 +132,8 @@ const registerUser = async ruleFormRef => {
     } catch (e) {}
 }
 
-const back = () => {
-    ruleFormRef.value.resetFields()
+const back = ruleFormRef => {
+    ruleFormRef.resetFields()
     type.value = 'login'
 }
 

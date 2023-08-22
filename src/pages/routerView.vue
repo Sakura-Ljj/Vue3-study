@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 15:49:46
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-07-25 11:26:09
+ * @LastEditTime: 2023-08-09 19:13:31
  * @FilePath: \vue3project\src\pages\routerView.vue
  * @Description:
 -->
@@ -111,8 +111,12 @@ const userLogout = async () => {
 
 onMounted(async () => {
     pageData.loading = true
-    await user.getUserInfo()
-    pageData.loading = false
+    try {
+        await user.getUserInfo()
+        pageData.loading = false
+    } catch (e) {
+        pageData.loading = false
+    }
 })
 </script>
 <style scoped>
