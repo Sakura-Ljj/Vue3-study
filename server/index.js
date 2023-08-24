@@ -28,8 +28,8 @@ redisClient.on('error', (e) => {
 
 const contextPath = '/api'
 const requestLimit = '10240kb'
-const port = process.env.NODE_ENV === 'development' ? 3000 : ''
-const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost' : ''
+const port = process.env.NODE_ENV === 'development' ? 3000 : 8000
+const baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost' : '1.12.232.36'
 const app = express()
 
 // 处理 POST 请求的请求体
