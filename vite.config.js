@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 15:49:46
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-08-09 17:41:18
+ * @LastEditTime: 2023-08-28 15:09:58
  * @FilePath: \vue3project\vite.config.js
  * @Description: 构建配置
  */
@@ -52,6 +52,6 @@ export default defineConfig({
     },
 
     build: {
-        outDir: 'D:/practice/dist' // 打包输出路径
+        outDir: '../dist' // 打包输出路径
     }
 })

@@ -783,3 +783,71 @@ AuthorizedKeysFile .ssh/authorized_keys
 sudo service sshd restart
 ```
 
+### Linux服务器安装配置Redis
+
+- 进入Redis官网获取下载连接, 在Linux服务器中使用`wget`＋连接下载Redis压缩包
+- 使用`tar`命令解压Redis压缩包
+
+```powershell
+tar -zvxf fileName.tar.gz
+
+## -z 代表tar包被gzip压缩过(后缀是.tar.gz), 所以需要用gzip解压
+## -v 代表解压过程显示详细信息
+## -x 代表是解压文件操作
+## -f 后面跟的是需要解压或压缩的文件名称
+```
+
+- 解压后把文件目录放置到`/usr/local`下并重命名为redis
+
+```powershell
+mv 解压后文件存放的path /usr/loacl/redis
+```
+
+- cd到redis目录下运行`make`命令进行编译
+- 输入以下命令进行安装
+
+```powershell
+make PREFIX=/usr/loacl/redis install
+
+## PREFIX= 是用与指定安装存放目录, 方便后续删除
+## 不指定的话可执行文件会存放在/usr/local/bin
+## 库文件会存放在/usr/local/lib
+## 配置文件会存放在/usr/local/etc
+## 其他资源文件会存放在/usr/local/share
+```
+
+- 启动redis
+
+```powershell
+./bin/redis-server ./redis-conf &
+
+## & 在启动脚本最后跟 & 操作符可以使脚本在后台运行, 不占用当前控制台窗口
+## 也可以在redis-conf文件中把daemonize的属性设置为 yes, 也可以达到上面的效果
+
+## 如果想要在关闭控制台后依旧运行脚本, 可以在启动脚本的命令前加 nohup
+nohup ./bin/redis-server ./redis-conf &
+```
+
+- 使用`ps`命令查看redis进程是否正在运行
+
+```powershell
+ps -aux | grep redis
+```
+
+- 本地连接redis服务, 可以使用redis-cli
+- 设置redis的密码
+
+```powershell
+## 在redis-conf配置文件中找到requirepass配置项, 默认是注释掉的, 需要解开注释然后在后面加上密码即可
+
+## 在redis-cli中可以使用命令查看密码, 设置密码
+
+auth password ## 获取redis-cli权限
+config get requirepass ## 获取密码
+config set requirepass password ## 设置密码
+shutdown ## 关闭redis服务
+
+## ps: 使用命令在redis-cli中设置密码是不会写入到redis-conf配置文件中的, 所以使用redis-conf启动redis的话还是需要修改配置文件
+
+```
+
