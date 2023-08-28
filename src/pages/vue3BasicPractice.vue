@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 16:10:25
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-08-28 15:41:48
+ * @LastEditTime: 2023-08-28 15:46:49
  * @FilePath: \vue3project\src\pages\vue3BasicPractice.vue
  * @Description:
 -->
@@ -18,7 +18,7 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-import TodoList from '../components/todoList.vue'
+import TodoList from '../components/TodoList.vue'
 import Rate from '../components/Rate.vue'
 
 const score = ref(3)
