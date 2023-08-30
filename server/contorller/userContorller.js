@@ -64,6 +64,7 @@ async function userRegisterApi ({ password, userName }) {
 }
 
 async function getUserApi (event, req, res) {
+    console.log(req.session.userInfo, '------------')
     if (!req.session.userInfo) return {}
 
     const { userId } = req.session.userInfo
