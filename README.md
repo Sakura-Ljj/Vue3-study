@@ -976,4 +976,3 @@ mysql_secure_installation
 ```powershell
 mysql -uroot -pPassword -h localhost
 ```
-
