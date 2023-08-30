@@ -851,3 +851,129 @@ shutdown ## 关闭redis服务
 
 ```
 
+### Linux服务器安装配置Nginx
+
+- 先下载安装nginx必须用到的依赖
+
+```powershell
+yum -y install gcc-c++ pcre-devel zlib-devel openssl openssl-devel
+```
+
+- 去nginx官网复制下载连接, 使用`wget`命令下载压缩包
+
+```powershell
+wget nginx下载链接
+```
+
+- 解压nginx
+
+```powershell
+tar -zxvf nginx
+```
+
+- 把nginx目录迁移到`/usr/local`目录下
+- 进入nginx目录执行configure文件
+- 执行`make`命令
+- 执行`make PREFIX=下载目录 install`安装
+- 配置环境变量, 全局可以启动nginx
+
+```powershell
+## 进入 /etc/profile文件
+vim /etc/profile
+
+## 在文件最底部添加以下内容
+PATH=$PATH:/usr/local/nginx/sbin
+export PATH
+
+## 重新执行 profile文件
+source /etc/profile
+```
+
+- nginx配置文件
+
+```powershell
+## 启动nginx服务
+nginx
+
+## 使用配置文件启动nginx服务
+nginx -c nginx.conf
+
+## 重启nginx服务
+nginx -s reload
+
+## nginx配置文件
+
+server{
+	listen 8080; ## 监听监控
+	server_name localhost; ## 指定IP或域名
+	location /{
+		root path ## 项目地址
+		index index.html index.htm ## 项目的index页面
+	}
+	location /api/{
+		proxy_pass http://localhost:8000 ## 前端请求转发到这个IP地址上
+	}
+}
+```
+
+### Linux服务器安装配置Mysql
+
+- 先检查自己的Linux系统有个下载过Mysql及相关的内容
+
+```powershell
+rpm -qa | grep mysql
+rpm -qa | grep mariadb
+
+## 如果存在内容则删除
+rpm -n --nodeps xxx
+```
+
+- 去Mysql官网获取下载地址, 使用wget下载
+- 下载后可以使用`md5sum`命令查看下载的包的MD5与官网的是否一致
+
+```powershell
+md5sum package...
+```
+
+- 安装Mysql软件包
+
+```powershell
+rpm -ivh package...
+```
+
+- 安装Mysql
+
+```powershell
+yum install mysql-server
+```
+
+- 启动Mysql服务
+
+```powershell
+systemctl start mysqld
+
+## 检查Mysql服务状态
+systemctl status mysqld
+```
+
+- 查询Mysql root用户的临时密码
+
+```powershell
+grep 'remporary password' /var/log/mysqld.log
+```
+
+- 设置Mysql新密码
+
+```powershell
+## 初次更改默认密码
+mysql_secure_installation
+
+## Mysql密码规则需要强安全性密码(包含8-12个字符, 并且是数字、字母和符号的组合)
+```
+
+- 登录Mysql服务器
+
+```powershell
+mysql -uroot -pPassword -h localhost
+```
+
