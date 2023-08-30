@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-06-09 17:33:44
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-07-26 15:41:32
+ * @LastEditTime: 2023-08-30 17:40:35
  * @FilePath: \vue3project\server\contorller\userContorller.js
  * @Description: 用户相关 CGI
  */
@@ -58,7 +58,7 @@ async function userRegisterApi ({ password, userName }) {
     })
 
     await requestData({
-        sql: 'insert into is_user_user set ?',
+        sql: 'insert into is_user_info set ?',
         values: [{ userId: insertId }]
     })
 }
