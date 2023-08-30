@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 15:49:46
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-08-30 15:03:02
+ * @LastEditTime: 2023-08-30 15:05:54
  * @FilePath: \vue3project\src\pages\routerView.vue
  * @Description:
 -->
@@ -64,7 +64,7 @@ const user = useUserStore()
 const pageData = reactive({
     navBar: [
         {
-            text: '响应式数据及Vue3基础学习123',
+            text: '响应式数据及Vue3基础学习',
             path: '/practice/vue3BasicPractice'
         },
         {
