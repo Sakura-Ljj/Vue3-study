@@ -901,11 +901,14 @@ nginx -c nginx.conf
 ## 重启nginx服务
 nginx -s reload
 
+## 停止nginx服务
+nginx -s stop ## 这个命令不行就使用kill命令强杀进程
 ## nginx配置文件
 
 server{
 	listen 8080; ## 监听监控
 	server_name localhost; ## 指定IP或域名
+	client_max_body_size 10m; ## nginx默认的请求体大小阈值时1m, 这用于更改默认的请求体大小
 	location /{
 		root path ## 项目地址
 		index index.html index.htm ## 项目的index页面
@@ -974,5 +977,5 @@ mysql_secure_installation
 - 登录Mysql服务器
 
 ```powershell
-mysql -uroot -pPassword -h localhost
+mysql -uroot -pPassword -h localhost database
 ```
