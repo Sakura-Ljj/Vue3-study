@@ -2,25 +2,29 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-05-06 16:09:47
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-07-10 18:02:40
+ * @LastEditTime: 2023-09-01 17:47:13
  * @FilePath: \vue3project\src\pages\indexPage\index.vue
  * @Description:
 -->
 <template>
-    <div class="grid" />
-    <div v-for="(item, index) in data.page_info" :key="index" class="tw-flex section tw-py-20 tw-my-3">
-        <div v-if="item.left.type === 'section'" class="tw-flex-1">
-            <Section :page-info="item.left" />
+    <div class="tw-relative tw-mb-10">
+        <div class="grid" />
+        <div v-for="(item, index) in data.page_info" :key="index" class="tw-flex section tw-py-20 tw-my-3">
+            <Section :page-info="item.left" direction="left" />
+            <Section :page-info="item.right" direction="right" />
         </div>
-        <div v-else class="tw-flex-1 tw-pr-7 tw-relative">
-            <img class="img img-left" :src="item.left.url" />
+    </div>
+    <div>
+        <div class="tw-text-center tw-mb-10">
+            <h1 class="tw-mb-5 tw-text-5xl">加入我们</h1>
+            <h4 class="tw-text-gray-600 tw-text-xl">一个汇集各种二次元元素, 各种亚文化元素, 各种技术人才的温暖大家庭</h4>
         </div>
-
-        <div v-if="item.right.type === 'section'" class="tw-flex-1">
-            <Section :page-info="item.right" />
-        </div>
-        <div v-else class="tw-flex-1 tw-pl-7 tw-relative">
-            <img class="img img-right" :src="item.right.url" />
+        <div class="tw-flex tw-flex-wrap">
+            <div v-for="(item, index) in data.join_us_info" :key="index" class="join_us_section tw-px-">
+                <div class="tw-h-60 tw-bg-gray-600 tw-mb-4" />
+                <h1 class="tw-mb-4">{{item.title}}</h1>
+                <div class="tw-text-lg tw-text-gray-600">{{item.introduce}}</div>
+            </div>
         </div>
     </div>
 </template>
@@ -58,6 +62,39 @@ const data = reactive({
                 btn_text: '触发跳转详情'
             }
         }
+    ],
+
+    join_us_info: [
+        {
+            title: 'Title Title',
+            introduce: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.Lorem ipsum, dolor sit amet consectetur',
+            imgUrl: ''
+        },
+        {
+            title: 'Title Title',
+            introduce: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.Lorem ipsum, dolor sit amet consectetur',
+            imgUrl: ''
+        },
+        {
+            title: 'Title Title',
+            introduce: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.Lorem ipsum, dolor sit amet consectetur',
+            imgUrl: ''
+        },
+        {
+            title: 'Title Title',
+            introduce: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.Lorem ipsum, dolor sit amet consectetur',
+            imgUrl: ''
+        },
+        {
+            title: 'Title Title',
+            introduce: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.Lorem ipsum, dolor sit amet consectetur',
+            imgUrl: ''
+        },
+        {
+            title: 'Title Title',
+            introduce: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.Lorem ipsum, dolor sit amet consectetur',
+            imgUrl: ''
+        }
     ]
 })
 </script>
@@ -87,7 +124,7 @@ const data = reactive({
     border: 1px solid rgba(30,30,30,.3);
     border-radius: 50%;
     bottom: -12px;
-    left: -5.5px;
+    left: -4.5px;
 }
 
 .grid {
@@ -100,15 +137,10 @@ const data = reactive({
     background-size: 1px 5px;
 }
 
-.img {
-  @apply tw-bg-slate-400 tw-h-full tw-w-full tw-absolute;
-}
-
-.img-left {
-    right: calc(1.75rem / 2 - 1px);
-}
-
-.img-right {
-    left: calc(1.75rem / 2);
+.join_us_section {
+    width: calc(100% / 3 - 2.5rem);
+    text-align: center;
+    padding: 0 1.25rem;
+    margin-bottom: 2.5rem;
 }
 </style>

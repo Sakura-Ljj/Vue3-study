@@ -151,7 +151,7 @@ onMounted(async () => {
   width: 1851px;
 }
 .main {
-  @apply tw-container tw-m-auto tw-relative;
+  @apply tw-container tw-m-auto;
 }
 
 /* element plus 的 dropdown有bug focus-visible的时候会显示一个黑色的外边框 */

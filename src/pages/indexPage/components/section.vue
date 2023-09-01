@@ -1,29 +1,40 @@
 <!--
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-06-01 15:56:33
- * @LastEditors: DESKTOP-H44236O\Sora 1430008132@qq.com
- * @LastEditTime: 2023-06-01 21:05:21
- * @FilePath: \Vue3-study\src\pages\indexPage\components\section.vue
+ * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
+ * @LastEditTime: 2023-09-01 15:38:08
+ * @FilePath: \vue3project\src\pages\indexPage\components\section.vue
  * @Description:
 -->
 <template>
-    <img src="@assets/icons/consult.svg" alt="" class="tw-w-14 tw-h-14" />
-    <h1 class="tw-my-5">{{props.pageInfo.title}}</h1>
-    <div class="tw-text-blue-400 tw-mb-3">{{props.pageInfo.tips}}</div>
-    <div class="tw-text-gray-400">{{props.pageInfo.content}}</div>
-    <div class="btn-border hover:tw-bg-blue-400 tw-text-gray-800 hover:tw-text-white tw-mt-10">
-        <div class="tw-flex tw-items-center">
-            <Share class="tw-w-8 tw-mr-2" />
-            <span>{{props.pageInfo.btn_text}}</span>
+    <div v-if="pageInfo.type === 'section'" class="tw-flex-1">
+        <img src="@assets/icons/consult.svg" alt="" class="tw-w-14 tw-h-14" />
+        <h1 class="tw-my-5">{{props.pageInfo.title}}</h1>
+        <div class="tw-text-blue-400 tw-mb-3">{{props.pageInfo.tips}}</div>
+        <div class="tw-text-gray-400">{{props.pageInfo.content}}</div>
+        <div class="btn-border hover:tw-bg-blue-400 tw-text-gray-800 hover:tw-text-white tw-mt-10">
+            <div class="tw-flex tw-items-center">
+                <Share class="tw-w-8 tw-mr-2" />
+                <span>{{props.pageInfo.btn_text}}</span>
+            </div>
         </div>
+    </div>
+    <div v-if="pageInfo.type === 'img'" :class="['tw-flex-1', 'tw-relative', imgClass[direction]]">
+        <img :class="['img', `img-${direction}`]" :src="pageInfo.url" />
     </div>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, ref } from 'vue'
 
 const props = defineProps({
-    pageInfo: { type: Object, default: () => {} }
+    pageInfo: { type: Object, default: () => {} },
+    direction: { type: String }
+})
+
+const imgClass = ref({
+    left: 'tw-pr-7',
+    right: 'tw-pl-7'
 })
 </script>
 
@@ -36,5 +47,17 @@ const props = defineProps({
     padding: 10px 25px;
     line-height: 40px;
     cursor: pointer;
+}
+
+.img {
+  @apply tw-bg-slate-400 tw-h-full tw-w-full tw-absolute;
+}
+
+.img-left {
+    right: calc(1.75rem / 2 - 1px);
+}
+
+.img-right {
+    left: calc(1.75rem / 2);
 }
 </style>
