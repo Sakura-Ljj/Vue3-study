@@ -2,15 +2,16 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-06-05 19:27:58
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-07-20 14:20:48
+ * @LastEditTime: 2023-09-01 11:54:59
  * @FilePath: \vue3project\server\utils\setRoute.js
  * @Description: 全局路由配置
  */
 
 const errorCode = require('../config/errorCode')
-const { myError } = require('../utils/commonUtils')
+const { myError, DateFormat } = require('../utils/commonUtils')
 
 const setRoute = (method, handlerFunc, isCheckSession = false) => {
+    const dateTime = DateFormat(new Date(), 'YYYY-MM-dd hh:mm:ss')
     const handle = async (req, res) => {
         // 过滤 IP
         const requestClientIp = getClientIp(req)
@@ -38,7 +39,7 @@ const setRoute = (method, handlerFunc, isCheckSession = false) => {
             } else {
                 params = JSON.stringify(event)
             }
-            console.log(`req start path = ${req.path}, clientIp = ${requestClientIp}, params = ${params}`)
+            console.log(`[${dateTime}], req start path = ${req.path}, clientIp = ${requestClientIp}, params = ${params}`)
 
             result = await handlerFunc(event, req, res)
 
@@ -55,7 +56,7 @@ const setRoute = (method, handlerFunc, isCheckSession = false) => {
                     data: result
                 }
             }
-            console.log(`req end path = ${req.path}, clientIp = ${requestClientIp}, params = ${params}, costTime = ${new Date().getTime() - startTime}`)
+            console.log(`[${dateTime}], req end path = ${req.path}, clientIp = ${requestClientIp}, params = ${params}, costTime = ${new Date().getTime() - startTime}`)
         } catch (e) {
             if (e.code) {
                 result = {
@@ -70,7 +71,7 @@ const setRoute = (method, handlerFunc, isCheckSession = false) => {
                     data: null
                 }
             }
-            console.error(`req error path = ${req.path}, clientIp = ${requestClientIp}, params = ${JSON.stringify(event)}, err = ${e}`)
+            console.error(`[${dateTime}], req error path = ${req.path}, clientIp = ${requestClientIp}, params = ${JSON.stringify(event)}, err = ${e}`)
         }
         res.send(result)
     }
