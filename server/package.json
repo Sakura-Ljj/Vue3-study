@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "cross-env NODE_ENV=development nodemon index.js",
-    "start": "nohup npm run start > /home/deployuser/node.log 2>&1 &",
+    "start": "nohup cross-env NODE_ENV=production node index.js > /home/deployuser/node.log 2>&1 &",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
