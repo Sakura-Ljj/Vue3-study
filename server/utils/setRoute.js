@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-06-05 19:27:58
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-09-01 11:54:59
+ * @LastEditTime: 2023-09-04 15:16:31
  * @FilePath: \vue3project\server\utils\setRoute.js
  * @Description: 全局路由配置
  */
@@ -11,8 +11,8 @@ const errorCode = require('../config/errorCode')
 const { myError, DateFormat } = require('../utils/commonUtils')
 
 const setRoute = (method, handlerFunc, isCheckSession = false) => {
-    const dateTime = DateFormat(new Date(), 'YYYY-MM-dd hh:mm:ss')
     const handle = async (req, res) => {
+        const dateTime = DateFormat(new Date(), 'YYYY-MM-dd hh:mm:ss')
         // 过滤 IP
         const requestClientIp = getClientIp(req)
         if (!requestClientIp) throw myError(errorCode.FORBIDDEN_ERROR_CODE, '无权限访问')

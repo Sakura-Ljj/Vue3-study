@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-06-09 17:33:44
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-08-30 17:40:35
+ * @LastEditTime: 2023-09-04 11:08:01
  * @FilePath: \vue3project\server\contorller\userContorller.js
  * @Description: 用户相关 CGI
  */
@@ -11,7 +11,14 @@ const { pbkdf2Encrypt, pbkdf2Decrypt } = require('../utils/crypto')
 const errorCode = require('../config/errorCode')
 const { myError } = require('../utils/commonUtils')
 
-async function userLoginApi ({ userName, password }, req, res) {
+/**
+ * @description: 登录接口
+ * @param {String} userName // 用户名
+ * @param {String} password // 明文密码
+ * @param {Object} req
+ * @return {*}
+ */
+async function userLoginApi ({ userName, password }, req) {
     if (!userName || !password) throw myError(errorCode.REQUEST_PARAMS_ERROR_CODE, '参数错误')
 
     // 利用用户名查询数据库中用户存储的随机盐与密码
@@ -30,10 +37,22 @@ async function userLoginApi ({ userName, password }, req, res) {
     req.session.userInfo = { userId }
 }
 
+/**
+ * @description: 登出接口
+ * @param {Object} event
+ * @param {Object} req
+ * @return {*}
+ */
 function userLogoutApi (event, req) {
     req.session.userInfo = undefined
 }
 
+/**
+ * @description: 注册账号接口
+ * @param {String} password // 明文密码
+ * @param {String} userName // 用户名
+ * @return {*}
+ */
 async function userRegisterApi ({ password, userName }) {
     if (!userName || !password) throw myError(errorCode.REQUEST_PARAMS_ERROR_CODE, '参数错误')
 
@@ -63,8 +82,14 @@ async function userRegisterApi ({ password, userName }) {
     })
 }
 
+/**
+ * @description: 获取用户信息接口
+ * @param {Object} event
+ * @param {Object} req
+ * @param {Object} res
+ * @return {*}
+ */
 async function getUserApi (event, req, res) {
-    console.log(req.session.userInfo, '------------')
     if (!req.session.userInfo) return {}
 
     const { userId } = req.session.userInfo
@@ -75,6 +100,16 @@ async function getUserApi (event, req, res) {
     }).then(res => res[0])
 }
 
+/**
+ * @description: 编辑用户信息接口
+ * @param {String} nickName // 昵称
+ * @param {String} signature // 个性签名
+ * @param {String} mobile // 手机号
+ * @param {String} email // 邮箱
+ * @param {Number} sex // 性别
+ * @param {*} req
+ * @return {*}
+ */
 async function editUserApi ({ nickName, signature, mobile, email, sex }, req) {
     const updateValue = {
         nickName,
