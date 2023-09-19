@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-06-01 15:56:33
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-09-01 15:38:08
+ * @LastEditTime: 2023-09-19 19:24:02
  * @FilePath: \vue3project\src\pages\indexPage\components\section.vue
  * @Description:
 -->
@@ -34,7 +34,7 @@ const props = defineProps({
 
 const imgClass = ref({
     left: 'tw-pr-7',
-    right: 'tw-pl-7'
+    right: ''
 })
 </script>
 
@@ -55,9 +55,5 @@ const imgClass = ref({
 
 .img-left {
     right: calc(1.75rem / 2 - 1px);
-}
-
-.img-right {
-    left: calc(1.75rem / 2);
 }
 </style>
