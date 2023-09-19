@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 15:49:46
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-09-18 17:29:47
+ * @LastEditTime: 2023-09-19 18:11:34
  * @FilePath: \vue3project\src\pages\routerView.vue
  * @Description:
 -->
@@ -23,7 +23,7 @@ import { onMounted, ref } from 'vue'
 import { useUserStore } from '../store/userStore'
 import { useRoute } from 'vue-router'
 import Carousel from '../components/Carousel.vue'
-import NavBar from '../components/Navbar.vue'
+import NavBar from '../components/NavBar.vue'
 
 const user = useUserStore()
 const route = useRoute()
