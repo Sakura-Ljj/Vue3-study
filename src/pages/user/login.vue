@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-07-11 11:50:31
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-07-27 17:27:38
+ * @LastEditTime: 2023-09-20 16:37:39
  * @FilePath: \vue3project\src\pages\user\login.vue
  * @Description: 登录页面
 -->
@@ -141,7 +141,7 @@ const back = ruleFormRef => {
 
 <style scoped>
 .login-box {
-    @apply tw-w-80 tw-bg-white tw-bg-opacity-70 tw-py-5 tw-px-10 tw-rounded-md;
+    @apply  tw-w-full tw-bg-white tw-bg-opacity-70 tw-py-5 tw-px-10 tw-rounded-md tw-box-border min-[400px]:tw-w-96;
     position: absolute;
     top: 50%;
     left: 50%;

@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 17:48:27
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-03-06 17:02:09
+ * @LastEditTime: 2023-09-20 17:08:31
  * @FilePath: \vue3project\tailwind.config.cjs
  * @Description: tailwindcss配置文档
  */
@@ -40,14 +40,15 @@ module.exports = {
         },
 
         screens: {
-            mobile: '1145px'
+            desktop: '1145px'
+            // => @media (min-width: 1280px) { ... }
+
+            // mobile: '400px'
             // => @media (min-width: 1145px) { ... }
 
             // 'laptop': '1024px',
             // => @media (min-width: 1024px) { ... }
 
-            // 'desktop': '1280px',
-            // => @media (min-width: 1280px) { ... }
         }
     },
     variants: {

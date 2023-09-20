@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-06-01 15:56:33
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-09-19 19:24:02
+ * @LastEditTime: 2023-09-20 17:32:20
  * @FilePath: \vue3project\src\pages\indexPage\components\section.vue
  * @Description:
 -->
@@ -19,23 +19,19 @@
             </div>
         </div>
     </div>
-    <div v-if="pageInfo.type === 'img'" :class="['tw-flex-1', 'tw-relative', imgClass[direction]]">
+    <div v-if="pageInfo.type === 'img'" class="tw-flex-1 tw-relative">
         <img :class="['img', `img-${direction}`]" :src="pageInfo.url" />
     </div>
 </template>
 
 <script setup>
-import { defineProps, ref } from 'vue'
+import { defineProps } from 'vue'
 
 const props = defineProps({
     pageInfo: { type: Object, default: () => {} },
     direction: { type: String }
 })
 
-const imgClass = ref({
-    left: 'tw-pr-7',
-    right: ''
-})
 </script>
 
 <style scoped>
@@ -54,6 +50,6 @@ const imgClass = ref({
 }
 
 .img-left {
-    right: calc(1.75rem / 2 - 1px);
+  left: 1px
 }
 </style>

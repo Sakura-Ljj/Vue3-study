@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-09-18 14:50:05
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-09-19 17:55:01
+ * @LastEditTime: 2023-09-20 16:10:04
  * @FilePath: \vue3project\src\components\Navbar.vue
  * @Description: 导航栏组件
 -->
@@ -45,13 +45,32 @@
     <div v-show="clientWidth < 820">
         <div class="tw-py-2 tw-bg-blue-400 tw-pl-2 tw-flex tw-items-center tw-justify-center tw-relative" @click="drawer = !drawer">
             <el-icon color="#FFFFFF" size="30" class="mobile-drawer-icon"><Menu /></el-icon>
-            <span class="tw-text-lg tw-text-white">IS模拟官网</span>
+            <span class="tw-text-lg tw-text-white">{{navBar.find(item => item.path === route.path).text}}</span>
         </div>
         <el-drawer
             v-model="drawer"
             direction="ltr"
             size="65%"
+            :show-close="false"
+            class="tw-relative"
         >
+            <template #header>
+                <div class="tw-mb-20" />
+            </template>
+            <div class="mobile-avatar" @click="toLogin">
+                <el-avatar :src="user.userInfo.avatar ? `/api/common/getImage?url=${user.userInfo.avatar}` : ''" :size="70" class="tw-mb-3">
+                    <el-icon size="40"><UserFilled /></el-icon>
+                </el-avatar>
+                <div class="tw-text-center">
+                    <template v-if="user.userInfo.userId">
+                        <div>
+                            <span class="tw-mr-2">{{user.userInfo.nickName || 'NickName'}}</span>
+                            <el-tag>{{roleMap[user.userInfo.role] || '普通成员'}}</el-tag>
+                        </div>
+                    </template>
+                    <span v-else>未登录</span>
+                </div>
+            </div>
             <ul>
                 <li
                     v-for="item in props.navBar"
@@ -70,6 +89,7 @@ import { defineProps, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useUserStore } from '../store/userStore'
 import { ElMessageBox, ElMessage } from 'element-plus'
+import commonConfig from '@utils/commonConfig'
 
 const router = useRouter()
 const route = useRoute()
@@ -78,6 +98,8 @@ const props = defineProps({
     loading: { type: Boolean, default: false },
     navBar: { type: Array, default: () => [] }
 })
+
+const { roleMap } = commonConfig
 
 const clientWidth = ref(document.body.clientWidth)
 window.addEventListener('resize', () => {
@@ -144,12 +166,18 @@ const userLogout = async () => {
 }
 
 .mobile-curr-nav {
-  @apply tw-bg-blue-400 tw-bg-opacity-50 tw-text-white
+  @apply tw-bg-blue-400/50 tw-text-white
 }
 
 .mobile-drawer-icon {
   position: absolute !important;
   left: 0.5rem !important
+}
+
+.mobile-avatar {
+  position: absolute;
+  top: 20px;
+  left: calc(20px + 0.75rem)
 }
 
 /* element plus 的 dropdown有bug focus-visible的时候会显示一个黑色的外边框 */

@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-05-06 19:23:16
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-05-06 19:23:37
+ * @LastEditTime: 2023-09-20 17:12:58
  * @FilePath: \vue3project\src\components\carousel.vue
  * @Description:
 -->
@@ -49,7 +49,6 @@ const data = reactive({
 </script>
 <style scoped>
 .img {
-  @apply tw-bg-white tw-flex tw-justify-center tw-items-center;
-  height: 512px;
+  @apply tw-bg-white tw-flex tw-justify-center tw-items-center tw-h-96 max-[400px]:tw-h-72;
 }
 </style>
