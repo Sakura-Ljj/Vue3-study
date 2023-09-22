@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 15:49:46
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-09-19 18:11:34
+ * @LastEditTime: 2023-09-22 15:02:55
  * @FilePath: \vue3project\src\pages\routerView.vue
  * @Description:
 -->
@@ -42,7 +42,7 @@ const navBar = ref([
         path: '/practice/vuePracticeJSX'
     },
     {
-        text: 'IS动漫社模拟官网',
+        text: 'IS动漫社模拟官网Test',
         path: '/index/indexPage'
     }
 ])
