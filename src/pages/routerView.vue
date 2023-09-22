@@ -10,7 +10,7 @@
     <div v-if="navBar.some(item => item.path === route.path)">
         <NavBar :loading="loading" :nav-bar="navBar" />
 
-        <Carousel v-if="route.path.includes('indexPage')" />
+        <Carousel v-if="route.path.includes('indexPage')" class="min-[400px]:tw-w-4/5 max-[400px]:tw-w-full tw-m-auto" />
 
         <div class="tw-container tw-m-auto">
             <router-view :key="route.fullPath" />
@@ -59,3 +59,10 @@ onMounted(async () => {
     }
 })
 </script>
+
+<style scoped>
+.carousel {
+  @apply tw-m-auto;
+  width: 1851px;
+}
+</style>

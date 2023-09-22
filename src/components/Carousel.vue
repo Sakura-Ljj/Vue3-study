@@ -2,13 +2,13 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-05-06 19:23:16
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-09-20 17:12:58
+ * @LastEditTime: 2023-09-20 17:56:31
  * @FilePath: \vue3project\src\components\carousel.vue
  * @Description:
 -->
 <template>
     <swiper
-        navigation
+        :navigation="false"
         :modules="data.modules"
         loop
         autoplay

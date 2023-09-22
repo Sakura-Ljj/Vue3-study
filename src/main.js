@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 15:49:46
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-07-26 10:25:36
+ * @LastEditTime: 2023-09-22 11:03:54
  * @FilePath: \vue3project\src\main.js
  * @Description:
  */
@@ -20,6 +20,9 @@ import { createPinia } from 'pinia'
 const pinia = createPinia()
 const app = createApp(App)
 
+const userAgent = navigator.userAgent
+const isMobile = /iPhone|iPad|iPod|Android/.test(userAgent)
+
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
@@ -33,4 +36,5 @@ app.use(router)
     // .use(store)
     .use(ElementPlus)
     .use(pinia)
+    .provide('isMobile', isMobile)
     .mount('#app')
