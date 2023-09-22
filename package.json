@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:watch": "vite build --watch",
+    "build:watch": "nohup vite build --watch > /home/deployuser/bulid.log 2>&1 &",
     "preview": "vite preview"
   },
   "dependencies": {
