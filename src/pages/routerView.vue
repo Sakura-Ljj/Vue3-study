@@ -19,6 +19,7 @@
     <router-view v-else :key="route.fullPath" />
 </template>
 <script setup>
+// 触发构建
 import { onMounted, ref } from 'vue'
 import { useUserStore } from '../store/userStore'
 import { useRoute } from 'vue-router'
