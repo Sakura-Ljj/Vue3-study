@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2022-12-14 15:49:46
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-10-10 17:08:01
+ * @LastEditTime: 2023-10-10 17:28:23
  * @FilePath: \vue3project\src\pages\routerView.vue
  * @Description:
 -->
@@ -19,7 +19,6 @@
     <router-view v-else :key="route.fullPath" />
 </template>
 <script setup>
-// 触发构建
 import { onMounted, ref } from 'vue'
 import { useUserStore } from '../store/userStore'
 import { useRoute } from 'vue-router'
@@ -43,7 +42,7 @@ const navBar = ref([
         path: '/practice/vuePracticeJSX'
     },
     {
-        text: 'IS动漫社模拟官网',
+        text: 'IS动漫社模拟官网test',
         path: '/index/indexPage'
     }
 ])
