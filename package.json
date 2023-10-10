@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --emptyOutDir", // --emptyOutDir参数是用于清空outDir里的内容
+    "build": "vite build",
     "build:watch": "nohup vite build --watch > /home/deployuser/bulid.log 2>&1 &",
     "preview": "vite preview"
   },
