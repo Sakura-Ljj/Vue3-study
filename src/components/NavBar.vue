@@ -2,12 +2,12 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-09-18 14:50:05
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-09-20 16:10:04
+ * @LastEditTime: 2023-10-20 19:15:25
  * @FilePath: \vue3project\src\components\Navbar.vue
  * @Description: 导航栏组件
 -->
 <template>
-    <div v-show="clientWidth >= 820" class="header tw-mb-3">
+    <div v-show="clientWidth >= 820" class="header">
         <div class="tw-max-w-full tw-flex tw-justify-around">
             <div class="logo tw-text-blue-400 tw-py-2">LOGO</div>
             <ul class="tw-flex">
