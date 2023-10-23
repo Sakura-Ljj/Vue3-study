@@ -9,7 +9,7 @@
 <template>
     <div class="tw-relative tw-mb-10">
         <div class="grid max-[400px]:tw-left-5 min-[400px]:tw-left-1/2" />
-        <div v-for="(item, index) in data.page_info" :key="index" :class="[isMobile ? ['tw-pb-20', 'tw-mt-5'] : ['tw-flex', 'tw-items-center', 'tw-py-20', 'tw-my-3'], 'section']">
+        <div v-for="(item, index) in data.page_info" :key="index" :class="[isMobile ? ['tw-pb-20'] : ['tw-flex', 'tw-items-center', 'tw-py-20', 'tw-my-3'], 'section']">
             <Section :page-info="item.left" direction="left" />
             <Section :page-info="item.right" direction="right" />
         </div>
