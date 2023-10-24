@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-05-06 16:09:47
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-09-22 11:59:57
+ * @LastEditTime: 2023-10-23 10:30:34
  * @FilePath: \vue3project\src\pages\indexPage\index.vue
  * @Description:
 -->
@@ -20,7 +20,7 @@
             <h4 class="tw-text-gray-600 tw-text-xl">一个汇集各种二次元元素, 各种亚文化元素, 各种技术人才的温暖大家庭</h4>
         </div>
         <div class="tw-flex tw-flex-wrap">
-            <div v-for="(item, index) in data.join_us_info" :key="index" class="join_us_section">
+            <div v-for="(item, index) in data.join_us_info" :key="index" class="join-us-section">
                 <div class="tw-h-60 tw-bg-gray-600 tw-mb-4" />
                 <h1 class="tw-mb-4">{{item.title}}</h1>
                 <div class="tw-text-lg tw-text-gray-600">{{item.introduce}}</div>
@@ -149,7 +149,7 @@ if (isMobile) {
     background-size: 1px 5px;
 }
 
-.join_us_section {
+.join-us-section {
     @apply min-[400px]:tw-w-1/3;
     text-align: center;
     padding: 0 1.25rem;
