@@ -30,6 +30,10 @@ const route = useRoute()
 
 const navBar = ref([
     {
+        text: 'IS动漫社模拟官网',
+        path: '/index/indexPage'
+    },
+    {
         text: '响应式数据及Vue3基础学习',
         path: '/practice/vue3BasicPractice'
     },
@@ -40,10 +44,6 @@ const navBar = ref([
     {
         text: 'Vue中的JSX',
         path: '/practice/vuePracticeJSX'
-    },
-    {
-        text: 'IS动漫社模拟官网',
-        path: '/index/indexPage'
     }
 ])
 

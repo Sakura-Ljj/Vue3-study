@@ -2,19 +2,21 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-05-06 19:23:16
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-10-20 19:14:45
+ * @LastEditTime: 2023-10-25 15:45:14
  * @FilePath: \vue3project\src\components\carousel.vue
- * @Description:
+ * @Description: 轮播图组件
 -->
 <template>
     <swiper
         :navigation="false"
         :modules="data.modules"
         loop
-        :autoplay="data.pause"
+        :autoplay="{
+            pauseOnMouseEnter: !isMobile,
+        }"
         class="mySwiper"
     >
-        <swiper-slide v-for="item in data.swiper_data" :key="item.text" :class="['img', item.bg, 'tw-bg-wh']" @mouseenter="data.pause = false" @mouseleave="data.pause = true">
+        <swiper-slide v-for="item in data.swiper_data" :key="item.text" :class="['img', item.bg, 'tw-bg-wh', 'tw-cursor-pointer']" @mouseenter="data.pause = false" @mouseleave="data.pause = true">
             <div>{{item.text}}</div>
             <div class="btn-tips tw-text-ellipsis tw-overflow-hidden tw-whitespace-nowrap">
                 <span class="tw-ml-5">底部简介信息底部简介信息底部简介信息底部简介信息底部简介信息底部简介信息底部简介信息底部简介信息</span>
@@ -26,14 +28,14 @@
 <script setup>
 import { Navigation, Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { reactive } from 'vue'
+import { reactive, inject } from 'vue'
 import 'swiper/css'
 import 'swiper/css/navigation'
 
+const isMobile = inject('isMobile')
+
 const data = reactive({
     modules: [Navigation, Autoplay],
-
-    pause: true,
 
     swiper_data: [
         {
