@@ -13,6 +13,7 @@
         loop
         :autoplay="{
             pauseOnMouseEnter: !isMobile,
+            disableOnInteraction: false,
         }"
         class="mySwiper"
     >
