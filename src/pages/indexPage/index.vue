@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-05-06 16:09:47
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-10-23 10:30:34
+ * @LastEditTime: 2023-10-27 11:11:56
  * @FilePath: \vue3project\src\pages\indexPage\index.vue
  * @Description:
 -->
@@ -14,7 +14,7 @@
             <Section :page-info="item.right" direction="right" />
         </div>
     </div>
-    <div>
+    <div class="tw-mb-36">
         <div class="tw-text-center tw-mb-10">
             <h1 class="tw-mb-5 tw-text-5xl">加入我们</h1>
             <h4 class="tw-text-gray-600 tw-text-xl">一个汇集各种二次元元素, 各种亚文化元素, 各种技术人才的温暖大家庭</h4>
