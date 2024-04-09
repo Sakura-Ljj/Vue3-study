@@ -2,7 +2,7 @@
  * @Author: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
  * @Date: 2023-10-27 14:59:30
  * @LastEditors: TENCENT\v_jnnjieluo v_jnnjieluo@tencent.com
- * @LastEditTime: 2023-10-27 14:59:45
+ * @LastEditTime: 2023-10-31 11:41:02
  * @FilePath: \vue3project\src\components\Footer.vue
  * @Description: 底边栏组件
 -->
@@ -18,12 +18,11 @@
                 <span v-else>现正无限征求同好中~欢迎各种萌新咸鱼大腿关注噢_(:P</span>
             </div>
             <div>
-                <div :class="isMobile ? 'mobile-img' : 'img'" />
                 <div :class="isMobile ? 'mobile-qr-code' : 'qr-code'">
                     <img :src="getAssetURL('qrcode.jpg')" class="tw-w-32 tw-h-32 tw-block" />
-
                     <span class="tw-text-sm tw-text-gray-500">就等你了哟~</span>
                 </div>
+                <img :src="getAssetURL('IS_poster.png')" :class="isMobile ? 'mobile-img' : 'img'" />
             </div>
         </div>
     </div>
@@ -40,15 +39,15 @@ const isMobile = inject('isMobile')
 .qr-code {
   position: absolute;
   text-align: center;
+  right: 230px;
   top: -80px;
-  right: 0;
 }
 
 .img {
-  @apply tw-w-24 tw-h-36 tw-bg-gray-700 tw-rounded;
+  @apply tw-w-52 tw-h-64 tw-object-cover;
   position: absolute;
-  right: 180px;
-  top: -110px;
+  top: -165px;
+  right: 0;
 }
 
 .mobile-qr-code {
@@ -59,9 +58,9 @@ const isMobile = inject('isMobile')
 }
 
 .mobile-img {
-  @apply tw-w-24 tw-h-36 tw-bg-gray-700 tw-rounded;
+  @apply tw-w-36 tw-h-48 tw-object-cover;
   position: absolute;
-  top: -160px;
+  top: -170px;
   left: 15px;
 }
 </style>

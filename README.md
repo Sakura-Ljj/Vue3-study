@@ -676,6 +676,22 @@ template语法相对于JSX语法来说比较固定, 灵活性没有JSX高, 在�
 // 启动nodejs的时候用对应的命令就可以设置对应的环境变量
 ```
 
+### Linux命令随记
+
+```powershell
+ls -a # 查看文件夹中所有内容，包括隐藏内容
+cd # 切换路径
+vim # 查看文件
+shift + G # vim中快速跳转到页尾
+mkdir # 创建文件夹
+su # 切换用户
+ps aux | grep key # 按照关键字查看进程信息
+kill # 杀死进程，后面带进程id
+nohub # 启动进程的时带这个前缀可以使进程即使退出用户时依旧运行
+& # 启动进程时末尾加上这个符号可以使进程于后台运行
+wait # 在脚本文件中的两个命令之间加入这个可以使上一个命令进程运行完才运行下一个命令进程
+```
+
 ### Linux服务器搭建Git远程仓库
 
 - 在linux服务器上创建一个用于操作git仓库的用户
@@ -957,6 +973,9 @@ systemctl start mysqld
 
 ## 检查Mysql服务状态
 systemctl status mysqld
+
+## 重启Mysql
+systemctl restart mysqld
 ```
 
 - 查询Mysql root用户的临时密码
@@ -979,3 +998,45 @@ mysql_secure_installation
 ```powershell
 mysql -uroot -pPassword -h localhost database
 ```
+
+### Linux服务器在Nginx中手动配置ssl证书
+
+```powershell
+server {
+        listen 8001 ssl;
+        server_name sora.host;
+        gzip on;
+        #证书文件
+        ssl_certificate /usr/local/nginx/sora.host_ssl/sora.host_bundle.pem;
+        #私钥文件
+        ssl_certificate_key /usr/local/nginx/sora.host_ssl/sora.host.key;
+        ssl_session_timeout 5m;
+        #请按照以下协议配置
+        ssl_protocols TLSv1.2 TLSv1.3;
+        #请按照以下套件配置，配置加密套件，写法遵循 openssl 标准。
+        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
+        #ssl_prefer_server_ciphers on;
+
+        location / {
+            root   /home/deployuser/ddpa_dist;
+            index  index.html index.htm;
+        }
+
+        location /api/ {
+            proxy_set_header x-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header HOST $http_host;
+            proxy_set_header X-Forwarded-Proto https;
+            proxy_redirect http:// https://;
+            proxy_connect_timeout 240;
+            proxy_send_timeout 240;
+            proxy_read_timeout 240;
+            proxy_pass http://sora.host:12138;
+        }
+
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+             root html;
+        }
+    }
+```
+
